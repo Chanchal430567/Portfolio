@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Chanchal Ekotkhane - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* CSS Variables for Themes */
+    :root {
+    --primary-color: #27548A; /* Deep Blue */
+    --secondary-color: #183B4E; /* Darker Blue */
+    --background-color: #F3F3E0; /* Light Cream */
+    --text-color: #183B4E; /* Darker Blue */
+    --sidebar-bg: #F3F3E0; /* Light Cream */
+    --sidebar-text: #27548A; /* Deep Blue */
+    --accent-color: #DDA853; /* Gold */
+    --input-bg: #F3F3E0; /* Light Cream */
+    --input-border: #DDA853; /* Gold */
+    --button-bg: var(--accent-color); /* Gold */
+    --button-text: #FFFFFF; /* White */
+    --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --link-hover-bg: #DDA853; /* Gold */
+    --section-shadow-light: rgba(221, 168, 83, 0.3); /* Gold Shadow */
+    --fade-in-duration: 0.8s;
+    --artwork-transition: transform 0.4s ease, filter 0.4s ease;
+  }
+    [data-theme="dark"] {
+      --primary-color: #3399ff;
+      --secondary-color: #ecf0f1;
+      --background-color: #121212;
+      --text-color: #ddd;
+      --sidebar-bg: #242424;
+      --sidebar-text: #eee;
+      --accent-color: #f39c12;
+      --input-bg: #333;
+      --input-border: #555;
+      --button-bg: var(--accent-color);
+      --button-text: #222;
+      --box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+      --link-hover-bg: #f39c12;
+      --section-shadow-light: rgba(255, 174, 66, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--background-color);
+      color: var(--text-color);
+      display: flex;
+      min-height: 100vh;
+      overflow: hidden;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 280px;
+      height: 100vh;
+      background-color: var(--sidebar-bg);
+      color: var(--sidebar-text);
+      box-shadow: 2px 0 15px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 25px 18px 30px;
+      transition: background-color 0.4s ease, color 0.4s ease;
+      z-index: 1000;
+      backdrop-filter: saturate(180%) blur(10px);
+      border-right: 1px solid var(--input-border);
+    }
+
+      /* Add spacing between sections */
+  section {
+    margin-bottom: 60px; /* Add space after each section */
+  }
+
+  /* Smooth scrolling behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+    .profile-image {
+      width: 170px;
+      height: 270px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      margin-bottom: 18px;
+      border: 5px solid var(--primary-color);
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+      animation: pulseBorder 4s infinite alternate;
+      cursor: pointer;
+      position: relative;
+    }
+    .profile-image:hover {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 15px var(--accent-color);
+      animation-play-state: paused;
+    }
+    .profile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+      border-radius: 50%;
+    }
+    .profile-image:hover img {
+      transform: scale(1.05) rotate(2deg);
+    }
+
+    @keyframes pulseBorder {
+      0% {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 8px var(--primary-color);
+      }
+      100% {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 18px var(--accent-color);
+      }
+    }
+
+    .name {
+      font-weight: 700;
+      font-size: 1.7rem;
+      margin-bottom: 6px;
+      color: var(--primary-color);
+      text-align: center;
+      user-select: none;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.07);
+    }
+    .education {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent-color);
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    nav {
+      width: 100%;
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+
+    nav ul {
+      list-style: none;
+      width: 100%;
+      padding-right: 6px;
+    }
+
+    nav ul::-webkit-scrollbar {
+      width: 6px;
+    }
+    nav ul::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    nav ul::-webkit-scrollbar-thumb {
+      background-color: var(--primary-color);
+      border-radius: 10px;
+    }
+
+    nav ul li {
+      margin-bottom: 16px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: var(--sidebar-text);
+      font-weight: 600;
+      font-size: 1.15rem;
+      display: block;
+      padding: 12px 18px;
+      border-radius: 12px;
+      transition: background-color 0.35s cubic-bezier(0.17,0.67,0.83,0.67), color 0.35s ease, transform 0.3s ease;
+      user-select: none;
+      box-shadow: rgba(0, 0, 0, 0.05) 0 1px 6px;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      background-color: var(--link-hover-bg);
+      color: #fff;
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+
+    nav ul li a:hover::after,
+    nav ul li a.active::after {
+      content: " →";
+      font-weight: 700;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    [data-theme="dark"] .skill-item {
+  color: #fff; /* Set text color to white for better contrast */
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); /* Ensure background gradient is visible */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5); /* Adjust shadow for dark theme */
+}
+
+[data-theme="dark"] .skill-item:hover {
+  background: linear-gradient(135deg, var(--accent-color), var(--primary-color)); /* Reverse gradient on hover */
+  color: #000; /* Change text color to black for hover contrast */
+}
+    /* Theme Toggle Button */
+.theme-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--primary-color);
+  border: none;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-top: 18px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  user-select: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background-color: var(--accent-color);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+}
+
+.theme-toggle input[type="radio"] {
+  display: none;
+}
+
+.theme-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.theme-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: #fff;
+}
+
+.theme-icon.sun-icon {
+  opacity: 1;
+}
+
+.theme-icon.moon-icon {
+  opacity: 0;
+  transform: translateY(200%);
+}
+
+.theme-toggle[data-theme="dark"] .sun-icon {
+  opacity: 0;
+  transform: translateY(-200%);
+}
+
+.theme-toggle[data-theme="dark"] .moon-icon {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.theme-toggle[data-theme="light"] .sun-icon {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.theme-toggle[data-theme="light"] .moon-icon {
+  opacity: 0;
+  transform: translateY(200%);
+}
+
+    /* Main Content */
+    main {
+      margin-left: 280px;
+      padding: 28px 40px;
+      flex-grow: 1;
+      overflow-y: auto;
+      max-height: 100vh;
+      scroll-behavior: smooth;
+      transition: background-color 0.5s ease;
+    }
+
+    section {
+      margin-bottom: 48px;
+      opacity: 0;
+      transform: translateY(50px);
+      animation-fill-mode: forwards;
+      animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+      background: var(--sidebar-bg);
+      border-radius: 16px;
+      padding: 24px 28px;
+      box-shadow: 0 10px 25px var(--section-shadow-light);
+      transition: box-shadow 0.4s ease, background 0.4s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+      animation-name: fadeSlideUp;
+      animation-duration: var(--fade-in-duration);
+    }
+
+    #user-name {
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    section h2 {
+      font-size: 2.2rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      border-left: 6px solid var(--accent-color);
+      padding-left: 12px;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.07);
+      user-select: none;
+    }
+
+    section p,
+    section ul,
+    section li {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      user-select: text;
+    }
+
+    /* Personal Info Table - added id for table and span for email */
+    #personal-info-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    #personal-info-table th,
+    #personal-info-table td {
+      text-align: left;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--input-border);
+      font-weight: 600;
+    }
+    #personal-info-table th {
+      width: 140px;
+      color: var(--accent-color);
+    }
+    #personal-info-table a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    #personal-info-table a:hover {
+      color: var(--accent-color);
+      text-decoration: underline;
+    }
+
+    /* Inside email cell, a span with id for highlight or dynamic usage */
+    #email-highlight {
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    /* Contact Form */
+    form {
+      max-width: 500px;
+      background-color: var(--background-color);
+      padding: 24px 28px;
+      border-radius: 16px;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.10);
+      transition: box-shadow 0.3s ease;
+    }
+    form:hover {
+      box-shadow: 0 14px 38px rgba(0,0,0,0.15);
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--secondary-color);
+      user-select: none;
+    }
+
+    form input[type="text"],
+    form input[type="email"],
+    form textarea {
+      width: 100%;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      border: 2px solid var(--input-border);
+      border-radius: 12px;
+      font-size: 1rem;
+      background-color: var(--input-bg);
+      color: var(--text-color);
+      font-family: 'Poppins', sans-serif;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+      resize: vertical;
+    }
+
+    form input[type="text"]:focus,
+    form input[type="email"]:focus,
+    form textarea:focus {
+      border-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0 0 8px var(--primary-color);
+    }
+
+    form button {
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      font-weight: 700;
+      border: none;
+      padding: 15px 26px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1.15rem;
+      width: 100%;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.2);
+      transition: background-color 0.4s ease, transform 0.2s ease;
+      user-select: none;
+    }
+
+    form button:hover {
+      background-color: var(--accent-color);
+      transform: scale(1.05);
+      box-shadow: 0 8px 26px var(--accent-color);
+    }
+    form button:focus {
+      outline: 3px solid var(--accent-color);
+      outline-offset: 2px;
+    }
+
+    /* Skills List */
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 8px;
+      color: var(--secondary-color);
+    }
+
+    .skill-item {
+      background: linear-gradient(135deg, var(--secondary-color), var(--text-color));
+      color: #d77f7f;
+      padding: 10px 22px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      transition: background 0.6s ease, transform 0.3s ease;
+      cursor: default;
+      user-select: none;
+    }
+    .skill-item:hover {
+      background: linear-gradient(135deg, var(--secondary-color), var(--text-color));
+      transform: scale(1.1) rotate(3deg);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      color: #201818;
+      color: rgba(0,0,0,0.85);
+      cursor: pointer;
+    }
+
+    /* Achievements list */
+    .achievements-list {
+      list-style-type: disc;
+      padding-left: 24px;
+      margin-top: 8px;
+    }
+    .achievements-list li {
+      margin-bottom: 12px;
+      font-weight: 600;
+      user-select: text;
+    }
+
+    /* ArtWork grid */
+    .artwork-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 20px;
+      margin-top: 8px;
+    }
+
+    /* Added cursor pointer for clickable images */
+    .artwork-gallery img,
+    .profile-image img {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .artwork-gallery img {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+      transition: transform 0.4s ease, filter 0.4s ease;
+      filter: grayscale(20%) brightness(1.05);
+      opacity: 0;
+      transform: translateY(15px);
+      animation-fill-mode: forwards;
+    }
+    
+    .artwork-gallery img:hover {
+      filter: none;
+      transform: scale(1.12) rotate(2deg);
+      box-shadow: 0 14px 38px rgba(0,0,0,0.3);
+      z-index: 10;
+    }
+    .artwork-visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+      animation-name: fadeSlideUp;
+      animation-duration: 0.9s;
+      animation-delay: var(--delay, 0s);
+    }
+
+    
+
+    /* Writings */
+    .writings-list {
+      list-style-type: none;
+      margin-top: 8px;
+    }
+    .writing-item {
+      margin-bottom: 14px;
+      border-left: 6px solid var(--accent-color);
+      padding-left: 14px;
+      font-style: italic;
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.5;
+      user-select: text;
+      transition: border-color 0.4s ease;
+      cursor: default;
+    }
+    .writing-item:hover {
+      border-color: var(--primary-color);
+    }
+
+    /* Scrollbar styling for main */
+    main::-webkit-scrollbar {
+      width: 10px;
+    }
+    main::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    main::-webkit-scrollbar-thumb {
+      background-color: var(--primary-color);
+      border-radius: 15px;
+    }
+
+
+    /* Popup Overlay */
+    #img-popup-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      cursor: zoom-out;
+      animation: popupFadeIn 0.3s ease forwards;
+      padding: 10px 20px;
+      gap: 12px;
+      user-select: none;
+    }
+    #img-popup-overlay.visible {
+      display: flex;
+    }
+
+    #img-popup-overlay img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(255,255,255,0.6);
+      transition: transform 0.3s ease;
+      cursor: zoom-out;
+      user-select: none;
+      will-change: transform;
+    }
+    #img-popup-overlay img:focus {
+      outline: none;
+    }
+
+    #img-popup-caption {
+      color: var(--button-text);
+      font-size: 1rem;
+      font-weight: 600;
+      max-width: 90vw;
+      text-align: center;
+      user-select: text;
+      text-shadow: 0 0 6px rgba(0,0,0,0.6);
+    }
+
+    @keyframes popupFadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      body {
+        flex-direction: column;
+      }
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        padding: 20px 18px;
+        align-items: center;
+        box-shadow: none;
+        border-right: none;
+        border-bottom: 1px solid var(--input-border);
+      }
+      .profile-image {
+        width: 170px;
+        height: 180px;
+        border-width: 3px;
+        margin-bottom: 0;
+        margin-right: 20px;
+        animation: none !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      }
+      nav ul {
+        display: flex;
+        gap: 15px;
+        overflow-x: auto;
+        padding: 0;
+        margin: 0;
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary-color) transparent;
+      }
+      nav ul li {
+        margin-bottom: 0;
+        flex-shrink: 0;
+      }
+      nav ul li a {
+        padding: 8px 14px;
+        font-size: 1rem;
+        border-radius: 20px;
+      }
+      main {
+        margin-left: 0;
+        padding: 20px 22px 40px 22px;
+        max-height: 600px;
+        overflow-y: auto;
+      }
+      .education {
+        display: none;
+      }
+      .theme-toggle {
+        margin-left: auto;
+        padding: 10px 16px;
+        font-size: 0.95rem;
+        border-radius: 22px;
+        width: 120px;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar" role="navigation" aria-label="Main Sidebar Navigation">
+    <div class="profile-image" aria-label="Profile Image of Chanchal Ekotkhane" tabindex="0" title="Chanchal Ekotkhane">
+      <img src="profile.jpg" alt="my Profile" />
+    </div>
+    <div class="name" tabindex="0" aria-label="Name">Chanchal Ekotkhane</div>
+    <h4><i>Where art meets code, and passion finds purpose.</i></h4>
+    <!-- Sidebar -->
+    <nav>
+      <ul>
+        <li><a href="#about" tabindex="0">About Me</a></li>
+        <li><a href="#personal-info" tabindex="0">Personal Info</a></li> <!-- Link to Personal Info section -->
+        <li><a href="#contact" tabindex="0">Contact</a></li>
+        <li><a href="#skills" tabindex="0">Skills</a></li>
+        <li><a href="#achievements" tabindex="0">Achievements</a></li>
+        <li><a href="#artwork" tabindex="0">Art Work</a></li>
+        <li><a href="#writings" tabindex="0">My Writings</a></li>
+      </ul>
+    </nav>
+    
+<button class="theme-toggle" aria-pressed="false" aria-label="Toggle light, dark, and contrast themes" tabindex="0" data-theme="light" title="Toggle Light, Dark, and Contrast Themes" type="button">
+  <input type="radio" id="theme-light" name="theme" value="light" hidden>
+  <input type="radio" id="theme-dark" name="theme" value="dark" hidden>
+  <input type="radio" id="theme-contrast" name="theme" value="contrast" hidden>
+  <label for="theme-light" class="theme-icon sun-icon" title="Light Theme">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path stroke="currentColor" stroke-width="2" d="M12 1v3M12 20v3M20 12h3M1 12h3M16.95 7.05l2.12-2.12M4.93 19.07l2.12-2.12M16.95 16.95l2.12 2.12M4.93 4.93l2.12 2.12"/>
+    </svg>
+  </label>
+  <label for="theme-dark" class="theme-icon moon-icon" title="Dark Theme">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="2" d="M21 12.79A9 9 0 0 1 11.21 3 7 7 0 1 0 21 12.79z"/>
+    </svg>
+  </label>
+</button>
+  </aside>
+  
+  <main role="main" tabindex="0">
+    <section id="about">
+      <h2>About Me</h2>
+      <p>Hello! I am <span id="user-name">Chanchal Ekotkhane</span>, currently pursuing my B-Tech 1st year in Computer Science and Engineering with specialization in Artificial Intelligence and Machine Learning (CSE-AIML). I am passionate about technology, coding, and continuously learning new skills to shape my future career.</p>
+    </section>
+
+    <section id="personal-info">
+      <h2>Personal Info</h2>
+      <table id="personal-info-table" aria-label="Personal Information Table">
+        <tbody>
+          <tr>
+            <th>Name</th>
+            <td>Chanchal Ekotkhane</td>
+          </tr>
+          <tr>
+            <th>Birthday</th>
+            <td>27 April 2006</td>
+          </tr>
+          <tr>
+            <th>Nationality</th>
+            <td>Indian</td>
+          </tr>
+          <tr>
+            <th>Languages</th>
+            <td>English, Hindi, Marathi</td>
+          </tr>
+          <tr>
+            <th>Hobbies</th>
+            <td>Reading, Stippling Art, Music, Sky Watching, Poetry</td>
+          </tr>
+          <tr>
+            <th>Degree</th>
+            <td>B-Tech in CSE-AIML</td>
+          </tr>
+          <tr>
+            <th>Institution</th>
+            <td>P.R. Pote Patil College of Engineering and Management</td>
+          </tr>
+          <tr>
+            <th>Location</th>
+            <td>Amravati</td>
+          </tr>
+          <tr>
+            <th>Year</th>
+            <td>1st Year (2024-28)</td>
+          </tr>
+          <tr>
+            <th>Current CGPA</th>
+            <td>9.53</td>
+          </tr>
+          <tr>
+            <th>12th Grade</th>
+            <td>Bhartiya Mahavidyalaya, Morshi, Maharashtra State Board, Feb-24</td>
+          </tr>
+          <tr>
+            <th>10th Grade</th>
+            <td>Shantiniketan English School, Morshi, Maharashtra State Board, March-22</td>
+          </tr>
+          <tr>
+            <th>Email</th>
+            <td>
+              <a href="mailto:chanchalekotkhane@gmail.com">
+                <span id="email-highlight">chanchalekotkhane@gmail.com</span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <th>LinkedIn</th>
+            <td>
+              <a href="https://linkedin.com/in/chanchal-ekotkhane-250369338" target="_blank" rel="noopener noreferrer">
+                linkedin.com/in/chanchal-ekotkhane-250369338
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <th>Pinterest</th>
+            <td>
+              <a href="https://pinterest.com/chanchalekotkhane" target="_blank" rel="noopener noreferrer">
+                chanchalekotkhane
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <form id="contact-form" aria-label="Contact form">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your Name" required autocomplete="name" />
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="your.email@example.com" required autocomplete="email" />
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="4" placeholder="Your message here..." required></textarea>
+        <button type="submit" aria-label="Send message">Send</button>
+      </form>
+    </section>
+
+    <section id="skills" style="padding: 2rem; font-family: sans-serif; color: black;">
+      <h2 style="text-align: center; font-size: 2rem; margin-bottom: 1rem;">✨ My Skills</h2>
+    
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+        
+        <div style="background: #f0f0f0; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <h3>🖥 Programming Languages</h3>
+          <ul>
+            <li>C</li>
+            <li>JavaScript</li>
+            <li>Java</li>
+          </ul>
+        </div>
+    
+        <div style="background: #f0f0f0; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <h3>🌐 Web Development</h3>
+          <ul>
+            <li>HTML5</li>
+            <li>JavaScript</li>
+            <li>CSS</li>
+          </ul>
+        </div>
+    
+        <div style="background: #f0f0f0; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <h3>💡 Soft Skills</h3>
+          <ul>
+            <li>Problem Solving</li>
+            <li>Creativity</li>
+            <li>Team Collaboration</li>
+            <li>Public Speaking</li>
+          </ul>
+        </div>
+    
+        <div style="background: #f0f0f0; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <h3>🍳 Practical Life Skills</h3>
+          <ul>
+            <li>Cooking</li>
+            <li>Time Management</li>
+            <li>Household Organization</li>
+          </ul>
+        </div>
+    
+        <div style="background: #f0f0f0; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <h3>🎨 Creative Skills</h3>
+          <ul>
+            <li>Portrait Stippling</li>
+            <li>Crafting & DIY</li>
+            <li>Creative Writing</li>
+            <li>Photography</li>
+          </ul>
+        </div>
+    
+      </div>
+    </section>
+
+    <section id="achievements">
+      <h2>My Achievements</h2>
+      <ul>
+        <li>🏅 1st Prize in Portrait Stippling</li>
+        <li>📜 Medal in Techlons-25</li>
+        <li>📄 Google AI ML Virtual Internship (Eduskill)</li>
+        <li>🌐 Full Webstack Development Internship (Eduskill)</li>
+      </ul>
+      <div class="achievement-lists">
+        <img src="medal2.jpg" alt="medal for poster competition" width="200" height="150">
+        <img src="medal.jpg" alt="medal in Techlons-25 for Gang day" width="200" height="150">
+        <img src="pic2.jpg" alt="Poster competition Certificate" width="200">
+        <img src="pic4.jpg" alt="certificate for internship in full webstack development offered by eduskill" width="200">
+        <img src="pic3.jpg" alt="Gang day Certificate" width="200">
+        <img src="pic5.jpg" alt="certificate for Students' chapter membership" width="200">
+        <img src="pic1.jpg" alt="Certificate of Virtual Internship" width="200">
+      </div>
+    </section>
+
+    <section id="artwork">
+      <h2>My Art Work</h2>
+      <p>I love stippling, especially portraits and Mandala art. Here are a few types of artwork I do:</p>
+      <ul>
+        <li>Potrait Stippling</li>
+        <li>Mandala art</li>
+        <li>Sketching</li>
+      </ul>
+    
+      <!-- Add your artwork images here -->
+      <div class="artwork-gallery">
+        <div class="artwork-row">
+          <img src="photo1.jpg" alt="Artwork 1" class="artwork-img">
+          <img src="photo2.jpg" alt="Artwork 2" class="artwork-img">
+          <img src="photo3.jpg" alt="Artwork 3" class="artwork-img">
+        </div>
+        <div class="artwork-row">
+          <img src="photo4.jpg" alt="Artwork 4" class="artwork-img">
+          <img src="photo5.jpg" alt="Artwork 5" class="artwork-img">
+          <img src="photo6.jpg" alt="Artwork 6" class="artwork-img">
+          <img src="photo7.jpg" alt="Artwork 7" class="artwork-img">
+        </div>
+        <div class="artwork-row">
+          <img src="photo8.jpg" alt="Artwork 8" class="artwork-img">
+          <img src="photo9.jpg" alt="Artwork 9" class="artwork-img">
+          <img src="photo12.jpg" alt="Artwork 12" class="artwork-img">
+        </div>
+        <div class="artwork-row">
+          <img src="photo11.jpg" alt="Artwork 11" class="artwork-img">
+          <img src="photo13.jpg" alt="Artwork 13" class="artwork-img">
+          <img src="photo14.jpg" alt="Artwork 14" class="artwork-img">
+          <img src="photo15.jpg" alt="Artwork 15" class="artwork-img">
+        </div>
+      </div>
+    </section>
+
+    <section id="writings">
+      <h2>My Writings</h2>
+      <p><i><strong>Poetry is when an emotion has found its thought and the thought has found words</strong></i></p>
+      <p><i><strong>These are not just words, they are whispers of my inner voice — dive into my writing.</strong></i></p>
+      <p><i><strong>Here's where my thoughts take shape and emotions find their voice — welcome to my writing.</strong></i></p>
+    
+      <div class="writings-list">
+        <img src="image1.jpg" alt="Dream-Holding a dream too big for words, too quiet to share." width="150" height="200">
+        <img src="image2.jpg" alt="The Space Within the Mind" width="150" height="200">
+        <img src="image3.jpg" alt="The Flight of Dreams" width="150" height="200">
+        <img src="image4.jpg" alt="Baba is the strong roof of trust and silent support through every storm" width="150" height="200">
+        <img src="image5.jpg" alt="Speaking with Myself..." width="150" height="200">
+        <img src="image6.jpg" alt="A Name That Stands Tall – Farmer" width="150" height="200">
+        <img src="image7.jpg" alt="The One Who Once Felt Like Mine..." width="150" height="200">
+        <img src="image8.jpg" alt="Unspoken Words, Undeniable Belonging 🌙✨" width="150" height="200">
+        <img src="image9.jpg" alt="Whom Do I Complain To?" width="150" height="200">
+        
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Image popup overlay -->
+  <div id="img-popup-overlay" role="dialog" aria-modal="true" aria-label="Image preview" tabindex="-1">
+    <img src="" alt="Expanded portfolio image" tabindex="0" />
+    <span id="img-popup-caption" aria-live="polite"></span>
+  </div>
+
+  <script>
+    // Theme toggle logic
+const themeToggleBtn = document.querySelector('.theme-toggle');
+const themeRadios = document.querySelectorAll('.theme-toggle input[type="radio"]');
+
+themeRadios.forEach(radio => {
+  radio.addEventListener('change', () => {
+    const selectedTheme = radio.value;
+    applyTheme(selectedTheme);
+  });
+});
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  themeToggleBtn.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+}
+
+// Load user theme preference or system default
+const currentTheme = localStorage.getItem('theme') || 'light';
+applyTheme(currentTheme);
+document.querySelector(`#theme-${currentTheme}`).checked = true;
+
+    themeToggleBtn.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    if (currentTheme === 'light') {
+      applyTheme('dark');
+    } else if (currentTheme === 'dark') {
+      applyTheme('contrast');
+    } else {
+      applyTheme('light');
+    }
+  });
+
+  document.getElementById('user-name').textContent = 'Chanchal Ekotkhane';
+
+  
+
+    // Navigation active link handling and smooth scroll
+    const navLinks = document.querySelectorAll('nav ul li a');
+    const sections = document.querySelectorAll('main section');
+
+    function changeActiveLink() {
+      let index = sections.length;
+
+      while(--index && window.scrollY + 80 < sections[index].offsetTop) {}
+      navLinks.forEach(link => link.classList.remove('active'));
+      navLinks[index].classList.add('active');
+    }
+
+    changeActiveLink();
+    window.addEventListener('scroll', changeActiveLink);
+
+    // Smooth scroll for nav links
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetID = link.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetID);
+        if(targetSection) {
+          window.scrollTo({
+            top: targetSection.offsetTop - 20,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Contact form submission (simulate)
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      alert('Thank you, ' + this.name.value + '! Your message has been sent.');
+      this.reset();
+    });
+
+    // Reveal animations on scroll for sections
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15
+    };
+    const sectionObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    sections.forEach(section => sectionObserver.observe(section));
+
+    // Reveal animation for artwork images
+    const artworkImgs = document.querySelectorAll('.artwork-gallery img');
+    const artworkObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('artwork-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold: 0.3});
+    artworkImgs.forEach(img => artworkObserver.observe(img));
+
+    // Image popup overlay
+    const popupOverlay = document.getElementById('img-popup-overlay');
+    const popupImage = popupOverlay.querySelector('img');
+    const popupCaption = document.getElementById('img-popup-caption');
+
+    // Helper function to open popup with given image src and alt
+    function openImagePopup(src, alt) {
+      popupImage.src = src;
+      popupCaption.textContent = alt || '';
+      popupImage.alt = alt || 'Expanded image';
+      popupOverlay.classList.add('visible');
+      popupOverlay.focus();
+      document.body.style.overflow = 'hidden'; // disable scroll on background
+    }
+
+    
+// Event delegation to listen for clicks on images
+function setImageFullScreenEffect(imgElement) {
+  imgElement.addEventListener('click', (e) => {
+    e.preventDefault();
+    openImageFullScreen(imgElement);
+  });
+
+  // Make keyboard accessible: open full screen on Enter or Space
+  imgElement.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openImageFullScreen(imgElement);
+    }
+  });
+
+  imgElement.style.cursor = 'pointer';
+  imgElement.setAttribute('tabindex', 0);
+  imgElement.setAttribute('role', 'button');
+  imgElement.setAttribute('aria-label', imgElement.alt ? imgElement.alt + ', Click to view full screen' : 'Click to view full screen image');
+}
+
+// Apply full-screen effect to all images
+const allImages = document.querySelectorAll('.artwork-gallery img, .profile-image img');
+allImages.forEach(img => {
+  setImageFullScreenEffect(img);
+});
+
+    // Helper function to close popup
+    function closeImagePopup() {
+      popupOverlay.classList.remove('visible');
+      popupCaption.textContent = '';
+      popupImage.src = '';
+      popupImage.alt = '';
+      document.body.style.overflow = ''; // enable scroll on background
+    }
+
+    // Event delegation to listen on profile image and gallery images
+    function setImageClickEffect(imgElement) {
+      // Add click pop effect before popup - scale up briefly
+      imgElement.addEventListener('mousedown', (e) => {
+        e.currentTarget.style.transform = 'scale(1.12) rotate(2deg)';
+      });
+      imgElement.addEventListener('mouseup', (e) => {
+        e.currentTarget.style.transform = '';
+      });
+      imgElement.addEventListener('mouseleave', (e) => {
+        e.currentTarget.style.transform = '';
+      });
+
+      imgElement.addEventListener('click', (e) => {
+        e.preventDefault();
+        const img = e.currentTarget;
+        openImagePopup(img.src, img.alt);
+      });
+
+      // Make keyboard accessible: open popup on Enter or Space
+      imgElement.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openImagePopup(imgElement.src, imgElement.alt);
+        }
+      });
+      imgElement.style.cursor = 'pointer';
+      imgElement.setAttribute('tabindex', 0);
+      imgElement.setAttribute('role', 'button');
+      imgElement.setAttribute('aria-label', imgElement.alt ? imgElement.alt + ', Click to view full screen' : 'Click to view full screen image');
+    }
+
+    // Apply popup functionality to achievement and writing images
+const achievementImgs = document.querySelectorAll('.achievement-lists img');
+const writingImgs = document.querySelectorAll('.writings-list img');
+
+// Set popup on achievement images
+achievementImgs.forEach(img => {
+  setImageClickEffect(img);
+});
+
+// Set popup on writing images
+writingImgs.forEach(img => {
+  setImageClickEffect(img);
+});
+
+
+
+    // Set profile image popup handlers
+    const profileImg = document.querySelector('.profile-image img');
+    setImageClickEffect(profileImg);
+
+    // Set popup on artwork images
+    artworkImgs.forEach(img => {
+      setImageClickEffect(img);
+    });
+
+    // Close popup on overlay click (outside image)
+    popupOverlay.addEventListener('click', e => {
+      if (e.target === popupOverlay) {
+        closeImagePopup();
+      }
+    });
+
+    // Close popup on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && popupOverlay.classList.contains('visible')) {
+        closeImagePopup();
+      }
+    });
+
+    // Focus trap inside popup image for accessibility
+    popupOverlay.addEventListener('keydown', (e) => {
+      // Only one focusable element - image itself
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        popupImage.focus();
+      }
+    });
+  </script>
+</body>
+</html>
